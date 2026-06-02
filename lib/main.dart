@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_skz/providers/songs_provider.dart';
+import 'package:provider/provider.dart';
 import 'screens/screens.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => SongsProvider())],
+      child: const MyApp(),
+    ),
+  );
+  // runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Color.fromRGBO(154, 15, 75, 1)),
       ),
-      initialRoute: 'login',
+      initialRoute: 'playlist',
       routes: {
         'login': (context) => const LoginScreen(),
         'playlist': (context) => const PlaylistScreen(),
