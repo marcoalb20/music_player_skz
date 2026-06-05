@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_skz/providers/songs_provider.dart';
 import 'package:music_player_skz/widgets/widgets.dart';
+import 'package:provider/provider.dart';
 
 class PlaylistScreen extends StatelessWidget {
   const PlaylistScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SongsProvider songsProvider = Provider.of<SongsProvider>(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -28,11 +32,14 @@ class PlaylistScreen extends StatelessWidget {
                   HeaderPlaylist(),
                   ButtonsMediaPlaylist(),
                   ListSongsDetailsPlaylist(),
-                  SizedBox(height: 100),
+                  songsProvider.currentSong.url.isNotEmpty
+                      ? SizedBox(height: 100)
+                      : SizedBox(height: 20),
                 ],
               ),
             ),
-            BottomMediaActionPlaylist(),
+            if (songsProvider.currentSong.url.isNotEmpty)
+              BottomMediaActionPlaylist(),
           ],
         ),
       ),

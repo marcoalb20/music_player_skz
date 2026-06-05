@@ -26,140 +26,35 @@ class DetailScreen extends StatelessWidget {
     double phoneWidth = size.width;
     double phoneHeight = size.height;
 
-    return Scaffold(
-      backgroundColor: Color(0xFF121212),
-      appBar: AppBar(
-        elevation: 0,
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Color(0xFF121212),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        body: Stack(
           children: [
-            SizedBox(height: 20),
             Container(
-              height: phoneHeight * 0.6,
-              width: phoneWidth * 0.8,
+              height: double.infinity,
+              width: double.infinity,
               decoration: BoxDecoration(
-                color: Color(0xFF121212),
-                borderRadius: BorderRadius.circular(150),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withValues(alpha: 0.15),
-                    blurRadius: 5,
-                    spreadRadius: 2,
-                    offset: Offset(4, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    height: phoneWidth * 0.6,
-                    width: phoneWidth * 0.6,
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF121212),
-                      // color: Color.fromARGB(255, 255, 0, 0),
-                      borderRadius: BorderRadius.circular(150),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white.withValues(alpha: 0.15),
-                          blurRadius: 5,
-                          spreadRadius: 2,
-                          offset: Offset(4, 4),
-                        ),
-                      ],
-                    ),
-                    child: Stack(
-                      // fit: StackFit.expand,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(150),
-                          child: Image.asset(
-                            'assets/images/album.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Container(
-                          height: phoneWidth * 0.6,
-                          width: phoneWidth * 0.6,
-                          decoration: BoxDecoration(
-                            gradient: RadialGradient(
-                              colors: [
-                                Colors.transparent,
-                                Colors.transparent,
-                                Colors.black.withValues(
-                                  alpha: 0.8,
-                                ), // borde negro
-                              ],
-                              stops: [
-                                0.5,
-                                0.9,
-                                1.0,
-                              ], // desde qué punto empieza cada color
-                            ),
-                            borderRadius: BorderRadius.circular(150),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // SizedBox(height: 20),
-                  Column(
-                    children: [
-                      Text(
-                        songsProvider.currentSong.title,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          height: 1,
-                          fontFamily: 'NotoSansJP',
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Text(
-                          '- SKZ -',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            height: 1,
-                            fontFamily: 'NotoSansJP',
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                // color: colorApp,
+                gradient: LinearGradient(
+                  colors: [
+                    colorApp,
+                    Color.fromARGB(129, 18, 18, 18),
+                    Color(0xFF121212),
+                  ],
+                  end: Alignment.topRight,
+                  begin: Alignment.bottomLeft,
+                ),
               ),
             ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-              child: LinearProgressIndicator(
-                value: 0.5,
-                backgroundColor: Colors.white.withValues(alpha: 0.15),
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              ),
-            ),
-            SizedBox(height: 20),
-            Row(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Spacer(),
+                SizedBox(height: 20),
                 Container(
-                  padding: EdgeInsets.all(10),
+                  height: phoneHeight * 0.6,
+                  width: phoneWidth * 0.8,
                   decoration: BoxDecoration(
                     color: Color(0xFF121212),
                     borderRadius: BorderRadius.circular(150),
@@ -167,80 +62,197 @@ class DetailScreen extends StatelessWidget {
                       BoxShadow(
                         color: Colors.white.withValues(alpha: 0.15),
                         blurRadius: 5,
-                        spreadRadius: 2,
-                        offset: Offset(4, 4),
+                        spreadRadius: -5,
+                        offset: Offset(0, -10),
                       ),
                     ],
                   ),
-                  child: HugeIcon(
-                    icon: HugeIcons.strokeRoundedPrevious,
-                    color: Colors.white,
-                    size: 30,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        height: phoneWidth * 0.6,
+                        width: phoneWidth * 0.6,
+                        padding: EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Color(0xFF121212),
+                          borderRadius: BorderRadius.circular(150),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.white.withValues(alpha: 0.15),
+                              blurRadius: 5,
+                              spreadRadius: -5,
+                              offset: Offset(0, -10),
+                            ),
+                          ],
+                        ),
+                        child: Stack(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(150),
+                              child: Image.asset(
+                                'assets/images/album.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Container(
+                              height: phoneWidth * 0.6,
+                              width: phoneWidth * 0.6,
+                              decoration: BoxDecoration(
+                                gradient: RadialGradient(
+                                  colors: [
+                                    Colors.transparent,
+                                    Colors.transparent,
+                                    Colors.black.withValues(alpha: 0.8),
+                                  ],
+                                  stops: [0.5, 0.9, 1.0],
+                                ),
+                                borderRadius: BorderRadius.circular(150),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // SizedBox(height: 20),
+                      Column(
+                        children: [
+                          Text(
+                            songsProvider.currentSong.title,
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              height: 1,
+                              fontFamily: 'NotoSansJP',
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(
+                              '- SKZ -',
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.white,
+                                height: 1,
+                                fontFamily: 'NotoSansJP',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(width: 30),
-                Container(
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF121212),
-                    borderRadius: BorderRadius.circular(150),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white.withValues(alpha: 0.15),
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                        offset: Offset(4, 4),
-                      ),
-                    ],
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 20,
                   ),
-                  child: InkWell(
-                    onTap: () {
-                      if (songsProvider.currentSong.url.isNotEmpty) {
-                        if (songsProvider.isPlaying) {
-                          songsProvider.isPlaying = false;
-                          print('Pausando...');
-                          stopAudio();
-                        } else {
-                          songsProvider.isPlaying = true;
-                          print('Reproduciendo...');
-                          continueAudio();
-                        }
-                      } else {
-                        print('No se ha seleccionado una canción');
-                      }
+                  child: // Reemplaza el LinearProgressIndicator por esto:
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Container(
+                        height: 6,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF121212).withAlpha(200),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Container(
+                            height: 6,
+                            width: constraints.maxWidth * songsProvider.progress,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                      );
                     },
-                    child: HugeIcon(
-                      icon: (songsProvider.isPlaying)
-                          ? HugeIcons.strokeRoundedPauseCircle
-                          : HugeIcons.strokeRoundedPlayCircle,
-                      color: Colors.white,
-                      size: 35,
-                    ),
                   ),
                 ),
-                SizedBox(width: 30),
-                Container(
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    Spacer(),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF121212),
+                        borderRadius: BorderRadius.circular(150),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          songsProvider.previousSongButton();
+                        },
+                        child: HugeIcon(
+                          icon: HugeIcons.strokeRoundedPrevious,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 30),
+                    Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF121212),
+                        borderRadius: BorderRadius.circular(150),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          songsProvider.continueButtonAction();
+                        },
+                        child: HugeIcon(
+                          icon: songsProvider.continueButtonIcon(),
+                          color: Colors.white,
+                          size: 35,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 30),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Color(0xFF121212),
+                        borderRadius: BorderRadius.circular(150),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          songsProvider.nextSongButton();
+                        },
+                        child: HugeIcon(
+                          icon: HugeIcons.strokeRoundedNext,
+                          color: Colors.white,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                  ],
+                ),
+              ],
+            ),
+            Positioned(
+              top: 15,
+              left: 15,
+              child: InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     color: Color(0xFF121212),
-                    borderRadius: BorderRadius.circular(150),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white.withValues(alpha: 0.15),
-                        blurRadius: 5,
-                        spreadRadius: 2,
-                        offset: Offset(4, 4),
-                      ),
-                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [BoxShadow()],
                   ),
-                  child: HugeIcon(
-                    icon: HugeIcons.strokeRoundedNext,
-                    color: Colors.white,
-                    size: 30,
-                  ),
+                  child: Icon(Icons.arrow_back, color: Colors.white),
                 ),
-                Spacer(),
-              ],
+              ),
             ),
           ],
         ),

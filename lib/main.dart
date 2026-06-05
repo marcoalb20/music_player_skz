@@ -3,7 +3,13 @@ import 'package:music_player_skz/providers/songs_provider.dart';
 import 'package:provider/provider.dart';
 import 'screens/screens.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // final songsProvider = SongsProvider();
+
+  // await songsProvider.loa
+
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => SongsProvider())],
@@ -24,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Color.fromRGBO(154, 15, 75, 1)),
       ),
-      initialRoute: 'playlist',
+      initialRoute: 'login',
       routes: {
         'login': (context) => const LoginScreen(),
         'playlist': (context) => const PlaylistScreen(),

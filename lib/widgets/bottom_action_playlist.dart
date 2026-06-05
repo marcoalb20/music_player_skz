@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:music_player_skz/providers/songs_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -11,24 +10,13 @@ class BottomMediaActionPlaylist extends StatelessWidget {
   Widget build(BuildContext context) {
     SongsProvider songsProvider = Provider.of<SongsProvider>(context);
 
-    AudioPlayer player = songsProvider.audioPlayer;
-
-    void continueAudio() {
-      player.play();
-    }
-
-    void stopAudio() {
-      player.pause();
-    }
-
     return Positioned(
       bottom: 0,
       left: 0,
       right: 0,
       child: InkWell(
         onTap: () {
-          print('Abriendo detalles');
-          Navigator.pushNamed(context, 'detail');
+          songsProvider.detailButtonAction(context);
         },
         child: Container(
           height: 90,
@@ -85,25 +73,10 @@ class BottomMediaActionPlaylist extends StatelessWidget {
               Spacer(),
               InkWell(
                 onTap: () {
-                  if (songsProvider.currentSong.url.isNotEmpty) {
-                    if (songsProvider.isPlaying) {
-                      songsProvider.isPlaying = false;
-                      print('Pausando...');
-                      stopAudio();
-                    } else {
-                      songsProvider.isPlaying = true;
-                      print('Reproduciendo...');
-                      continueAudio();
-                    }
-                  } else {
-                    print('No se ha seleccionado una canción');
-                  }
+                  songsProvider.continueButtonAction();
                 },
                 child: HugeIcon(
-                  // icon: HugeIcons.strokeRoundedPauseCircle,
-                  icon: (songsProvider.isPlaying)
-                      ? HugeIcons.strokeRoundedPauseCircle
-                      : HugeIcons.strokeRoundedPlayCircle,
+                  icon: songsProvider.continueButtonIcon(),
                   color: Colors.black,
                   size: 30,
                 ),
