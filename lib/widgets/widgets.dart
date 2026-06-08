@@ -4,4 +4,7 @@ export 'blur_top_login.dart';
 export 'bottom_action_playlist.dart';
 export 'buttons_media_playlist.dart';
 export 'header_playlist.dart';
-export 'list_songs_details_playlist.dart';
+export 'list_songs_playlist.dart';
+export 'bg_container_detail.dart';
+export 'song_detail.dart';
+export 'pop_button_detail.dart';

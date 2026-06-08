@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:music_player_skz/models/song_model.dart';
+import 'package:music_player_skz/providers/page_provider.dart';
 import 'package:music_player_skz/providers/songs_provider.dart';
 import 'package:provider/provider.dart';
 
-class ListSongsDetailsPlaylist extends StatelessWidget {
-  const ListSongsDetailsPlaylist({super.key});
+class ListSongsPlaylist extends StatelessWidget {
+  const ListSongsPlaylist({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +41,20 @@ class SongItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SongsProvider songsProvider = Provider.of<SongsProvider>(context);
+    PageProvider pageProvider = PageProvider();
 
     return InkWell(
       onTap: () {
         songsProvider.playNewListSong(songModel);
       },
-      child: Container(
-        color: songsProvider.currentSongColor(songModel),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 400),
+        curve: Curves.easeInOut,
+        color: pageProvider.currentSongColor(
+          songsProvider.currentSong,
+          songModel,
+        ),
+        // color: songsProvider.currentSongColor(songModel),
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Row(
           children: [

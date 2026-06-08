@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:music_player_skz/providers/songs_provider.dart';
+import 'package:provider/provider.dart';
 
 class HeaderPlaylist extends StatelessWidget {
   const HeaderPlaylist({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SongsProvider songsProvider = Provider.of<SongsProvider>(context);
+    int totalsSongs = songsProvider.songsItems.length;
+
     return Padding(
       padding: EdgeInsets.all(20),
       child: Row(
@@ -37,7 +42,7 @@ class HeaderPlaylist extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Album | 17 canciones | 2026',
+                'Album | $totalsSongs canciones | 2020',
                 style: TextStyle(
                   color: Colors.grey,
                   height: 1,

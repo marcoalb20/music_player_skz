@@ -31,7 +31,7 @@ class PlaylistScreen extends StatelessWidget {
                   SizedBox(height: 20),
                   HeaderPlaylist(),
                   ButtonsMediaPlaylist(),
-                  ListSongsDetailsPlaylist(),
+                  ListSongsPlaylist(),
                   songsProvider.currentSong.url.isNotEmpty
                       ? SizedBox(height: 100)
                       : SizedBox(height: 20),

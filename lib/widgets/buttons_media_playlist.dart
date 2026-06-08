@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:music_player_skz/providers/page_provider.dart';
 import 'package:music_player_skz/providers/songs_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +10,7 @@ class ButtonsMediaPlaylist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SongsProvider songsProvider = Provider.of<SongsProvider>(context);
+    PageProvider pageProvider = PageProvider();
 
     return Padding(
       padding: EdgeInsets.all(20),
@@ -62,7 +64,7 @@ class ButtonsMediaPlaylist extends StatelessWidget {
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   // color: Colors.white.withValues(alpha: 0.2),
-                  color: songsProvider.randomButtonColor(),
+                  color: pageProvider.randomButtonColor(songsProvider.random),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(

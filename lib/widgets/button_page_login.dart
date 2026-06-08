@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:music_player_skz/providers/songs_provider.dart';
+import 'package:provider/provider.dart';
 
 class ButtonPageLogin extends StatelessWidget {
   const ButtonPageLogin({super.key});
@@ -8,6 +10,8 @@ class ButtonPageLogin extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SongsProvider songsProvider = Provider.of<SongsProvider>(context);
+
     Size size = MediaQuery.of(context).size;
     double phoneWidth = size.width;
 
@@ -21,8 +25,7 @@ class ButtonPageLogin extends StatelessWidget {
       child: Center(
         child: InkWell(
           onTap: () {
-            print('Opening music player...');
-            Navigator.pushNamed(context, 'playlist');
+            songsProvider.playlistButtonAction(context);
           },
           child: HugeIcon(
             icon: HugeIcons.strokeRoundedPlaySquare,

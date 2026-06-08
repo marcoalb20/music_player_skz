@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:music_player_skz/models/song_model.dart';
+import 'package:music_player_skz/screens/screens.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SongsProvider extends ChangeNotifier {
@@ -243,7 +244,35 @@ class SongsProvider extends ChangeNotifier {
   }
 
   void detailButtonAction(BuildContext context) {
-    Navigator.pushNamed(context, 'detail');
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: Duration(milliseconds: 600),
+        pageBuilder: (_, _, _) => DetailScreen(),
+        transitionsBuilder: (_, animation, _, child) {
+          return SlideTransition(
+            position: Tween<Offset>(
+              begin: Offset(0, 1),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
+  void playlistButtonAction(BuildContext context) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: Duration(milliseconds: 600),
+        pageBuilder: (_, _, _) => PlaylistScreen(),
+        transitionsBuilder: (_, animation, _, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+      ),
+    );
   }
 
   List<List<dynamic>> continueButtonIcon() {
@@ -274,19 +303,13 @@ class SongsProvider extends ChangeNotifier {
     playNewAudio();
   }
 
-  Color currentSongColor(SongModel selectedSong) {
-    if (_currentSong == selectedSong) {
-      return Color(0xFFef4138).withAlpha(50);
-    } else {
-      return Color(0xFF121212);
-    }
-  }
+  void seekToProgress(double percentage) {
+    final duration = _player.duration;
 
-  Color randomButtonColor() {
-    if (_random) {
-      return Color(0xFFef4138).withAlpha(50);
-    } else {
-      return Colors.white.withValues(alpha: 0.2);
+    if (duration != null) {
+      final newMilliseconds = duration.inMilliseconds * percentage;
+      final newPosition = Duration(milliseconds: newMilliseconds.toInt());
+      _player.seek(newPosition);
     }
   }
 }
