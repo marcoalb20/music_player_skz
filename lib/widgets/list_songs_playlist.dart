@@ -87,15 +87,18 @@ class SongItem extends StatelessWidget {
               ],
             ),
             Spacer(),
-            InkWell(
-              onTap: () {
-                print('Favorito - ${songModel.title}');
+
+            IconButton(
+              icon: HugeIcon(
+                icon: HugeIcons.strokeRoundedFavourite,
+                color: songModel.isFavorite
+                    ? const Color(0xFFef4138)
+                    : Colors.white,
+              ),
+              onPressed: () {
                 songsProvider.addFavorite(songModel);
               },
-              child: HugeIcon(
-                icon: HugeIcons.strokeRoundedFavourite,
-                color: songModel.isFavorite ? Color(0xFFef4138) : Colors.white,
-              ),
+              splashRadius: 24,
             ),
           ],
         ),

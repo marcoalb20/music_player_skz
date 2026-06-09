@@ -168,7 +168,6 @@ class SongsProvider extends ChangeNotifier {
   void changeRandomState() {
     _random = !_random;
     if (_random) generateRandomPlaylist();
-    print('Estado del random: $_random');
     notifyListeners();
   }
 
@@ -194,9 +193,7 @@ class SongsProvider extends ChangeNotifier {
       }
 
       await prefs.setStringList(_favsKey, favoriteUrls);
-    } catch (e) {
-      print("Error al guardar favorito: $e");
-    }
+    } catch (e) {}
   }
 
   void playNewAudio() async {
@@ -211,7 +208,9 @@ class SongsProvider extends ChangeNotifier {
 
   void playNewListSong(SongModel newSongModel) {
     _currentSong = newSongModel;
-    changePlayState();
+    if (!_isPlaying) {
+      changePlayState();
+    }
     playNewAudio();
   }
 
@@ -231,7 +230,9 @@ class SongsProvider extends ChangeNotifier {
     } else {
       playInitialSong();
     }
-    changePlayState();
+    if (!_isPlaying) {
+      changePlayState();
+    }
   }
 
   void continueButtonAction() {
@@ -288,6 +289,7 @@ class SongsProvider extends ChangeNotifier {
     final currentIndex = playlist.indexOf(_songsItems.indexOf(_currentSong));
     final nextIndex = (currentIndex + 1) % playlist.length;
     _currentSong = _songsItems[playlist[nextIndex]];
+    _isPlaying = true;
     playNewAudio();
   }
 
@@ -300,6 +302,7 @@ class SongsProvider extends ChangeNotifier {
     final currentIndex = playlist.indexOf(_songsItems.indexOf(_currentSong));
     final prevIndex = (currentIndex - 1 + playlist.length) % playlist.length;
     _currentSong = _songsItems[playlist[prevIndex]];
+    _isPlaying = true;
     playNewAudio();
   }
 

@@ -6,10 +6,6 @@ import 'screens/screens.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // final songsProvider = SongsProvider();
-
-  // await songsProvider.loa
-
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => SongsProvider())],
